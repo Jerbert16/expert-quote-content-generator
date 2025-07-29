@@ -78,6 +78,11 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
     setExperts((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleClearBlog = () => {
+    setGeneratedContent("");
+    setApiError("");
+  };
+
   const handleGenerateBlog = async () => {
     if (!topic.trim()) {
       setApiError("Please enter a topic for the blog post");
@@ -246,7 +251,46 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
               <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
                 Expert Responses ({experts.length})
               </h3>
-              <div className="space-y-3 sm:space-y-4">
+<div
+  className={`space-y-3 sm:space-y-4 ${experts.length > 3 ? "overflow-y-auto max-h-[50rem] pr-2" : ""}`}
+  style={{
+    scrollbarWidth: "thin",
+    scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
+  }}
+>
+  <style jsx>{`
+    div::-webkit-scrollbar {
+      width: 6px;
+    }
+    div::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+    div::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+    }
+    div::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  `}</style>
+
+                <style jsx>{`
+                  div::-webkit-scrollbar {
+                    width: 6px;
+                  }
+                  div::-webkit-scrollbar-track {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 3px;
+                  }
+                  div::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 3px;
+                  }
+                  div::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.5);
+                  }
+                `}</style>
                 {experts.map((expert, index) => (
                   <div
                     key={index}
@@ -338,7 +382,15 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
           {/* Generated Content */}
           {generatedContent && (
             <div className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6">
-              <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Generated Blog Post</h3>
+              <div className="flex justify-between items-center mb-3 sm:mb-4">
+                <h3 className="text-white font-semibold text-sm sm:text-base">Generated Blog Post</h3>
+                <button
+                  onClick={handleClearBlog}
+                  className="text-red-400 hover:text-red-300 text-xs sm:text-sm transition-colors px-3 py-1 rounded-lg hover:bg-red-500/10"
+                >
+                  Clear Blog
+                </button>
+              </div>
               <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 max-h-80 sm:max-h-96 overflow-y-auto">
                 <pre className="text-gray-200 text-xs sm:text-sm whitespace-pre-wrap break-words">{generatedContent}</pre>
               </div>

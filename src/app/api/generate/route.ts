@@ -97,10 +97,10 @@ IMPORTANT REQUIREMENTS:
 4. Each quote must be properly attributed to the expert (e.g., "Quote text here," says John Smith, CTO at Company X.)
 5. Provide context and analysis around each quote to explain its significance
 6. Include an introduction, main body with expert insights, and conclusion
-7. Use proper markdown formatting with headers (##, ###)
-8. Ensure the article is between 800-1500 words
+7. Put into html tags so posting the blog is a simple copy and paste into a rich text editor for an existing CMS - only include tags with writing
 9. **Every single expert quote from the provided list must appear in the final article with proper attribution**
 10. Format quotes using markdown quote blocks (>) or inline quotes with proper attribution
+11. Write with SEO best practices in mind
 
 Example quote format: 
 - Inline: "The future of AI is bright," explains Dr. Jane Smith, AI Researcher at Tech Corp.
