@@ -4,7 +4,7 @@ import { ExpertForm as ExpertFormType } from '@/app/types';
 interface Props {
   form: ExpertFormType;
   errors: Partial<ExpertFormType>;
-  handleInputChange: (field: keyof ExpertFormType) => (e: React.ChangeEvent<any>) => void;
+  handleInputChange: (field: keyof ExpertFormType) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   handleAddExpert: (e: React.FormEvent) => void;
 }
 

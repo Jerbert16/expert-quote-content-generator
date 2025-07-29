@@ -32,16 +32,16 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
   const [generatedContent, setGeneratedContent] = useState("");
   const [apiError, setApiError] = useState("");
 
-  // Question of the Day data - this could come from an API or be dynamically set
+  // Question of the Day data
   const questionOfTheDay = {
     question: "How do you use AI when it comes to content creation?",
-    date: new Date().toLocaleDateString('en-US', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    date: new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }),
-    responses: experts.length // Dynamic based on expert responses
+    responses: experts.length,
   };
 
   const handleInputChange =
@@ -127,7 +127,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
               Hey Marketing Experts! 👋
             </h2>
             <p className="text-white/70 text-sm">
-              Share your expertise by answering today's question.
+              Share your expertise by answering today&apos;s question.
             </p>
           </div>
 
@@ -149,11 +149,11 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                 <span>{questionOfTheDay.responses} responses</span>
               </div>
             </div>
-            
+
             {/* Question */}
             <div className="bg-white/80 rounded-lg sm:rounded-xl p-3 sm:p-4 border-l-4 sm:border-l-6 border-teal-400 mb-4 sm:mb-6">
               <p className="text-gray-800 text-sm sm:text-base leading-relaxed italic font-medium">
-                "{questionOfTheDay.question}"
+                &quot;{questionOfTheDay.question}&quot;
               </p>
             </div>
 
@@ -206,7 +206,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                   rows={4}
                   value={form.quote}
                   onChange={handleInputChange("quote")}
-                  placeholder="Share your thoughts on the most effective marketing strategy you've implemented this year..."
+                  placeholder="Share your thoughts on the most effective marketing strategy you&apos;ve implemented this year..."
                   className={`w-full px-3 sm:px-4 py-3 sm:py-3.5 bg-transparent border rounded-lg sm:rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 ${
                     errors.quote
                       ? "border-red-400 focus:ring-red-500/70"
@@ -243,7 +243,9 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
           {/* Expert Responses */}
           {experts.length > 0 && (
             <div className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6">
-              <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Expert Responses ({experts.length})</h3>
+              <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+                Expert Responses ({experts.length})
+              </h3>
               <div className="space-y-3 sm:space-y-4">
                 {experts.map((expert, index) => (
                   <div
@@ -253,8 +255,12 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-white text-sm sm:text-base truncate">{expert.name}</div>
-                        {expert.title && <div className="text-xs sm:text-sm text-emerald-300 truncate">{expert.title}</div>}
-                        {expert.expertise && <div className="text-xs text-blue-300 mt-1 truncate">{expert.expertise}</div>}
+                        {expert.title && (
+                          <div className="text-xs sm:text-sm text-emerald-300 truncate">{expert.title}</div>
+                        )}
+                        {expert.expertise && (
+                          <div className="text-xs text-blue-300 mt-1 truncate">{expert.expertise}</div>
+                        )}
                       </div>
                       <button
                         onClick={() => handleRemoveExpert(index)}
@@ -263,13 +269,13 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                         Remove
                       </button>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <div className="text-sm text-gray-100 italic leading-relaxed">
                         <span className="text-white/60 text-xs uppercase tracking-wide block mb-1">Answer:</span>
-                        <div className="break-words">"{expert.quote}"</div>
+                        <div className="break-words">&quot;{expert.quote}&quot;</div>
                       </div>
-                      
+
                       {expert.context && expert.context.trim() && (
                         <div className="text-xs sm:text-sm text-gray-200 leading-relaxed bg-white/5 rounded-lg p-3 border-l-2 border-blue-400">
                           <span className="text-white/60 text-xs uppercase tracking-wide block mb-1">Additional Context:</span>
@@ -282,7 +288,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
               </div>
             </div>
           )}
-          
+
           {/* Placeholder when no experts */}
           {experts.length === 0 && (
             <div className="bg-white/5 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-dashed border-white/20">
@@ -306,7 +312,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
             <label className="block text-sm font-medium text-gray-100 mb-2">Blog Direction *</label>
             <input
               type="text"
-              placeholder="Describe the blog you'd like me to create with these responses..."
+              placeholder="Describe the blog you&apos;d like me to create with these responses..."
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               className="w-full px-3 sm:px-4 py-3 sm:py-3.5 bg-transparent border border-white/30 rounded-lg sm:rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400/70 focus:border-blue-400 bg-white/15 transition-colors text-sm sm:text-base"

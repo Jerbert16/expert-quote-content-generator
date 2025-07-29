@@ -24,11 +24,17 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate experts: must have name and quote, length limits
-    const isValidExpert = (e: any): e is Expert =>
-      e?.name?.trim() &&
-      e?.quote?.trim() &&
-      e.name.length <= 100 &&
-      e.quote.length <= 1000;
+    const isValidExpert = (e: unknown): e is Expert =>
+      typeof e === 'object' &&
+      e !== null &&
+      'name' in e &&
+      'quote' in e &&
+      typeof (e as Expert).name === 'string' &&
+      typeof (e as Expert).quote === 'string' &&
+      (e as Expert).name.trim().length > 0 &&
+      (e as Expert).quote.trim().length > 0 &&
+      (e as Expert).name.length <= 100 &&
+      (e as Expert).quote.length <= 1000;
 
     const valid = experts.filter(isValidExpert);
 

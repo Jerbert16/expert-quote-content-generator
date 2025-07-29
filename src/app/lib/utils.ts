@@ -1,6 +1,6 @@
 import { Expert } from '@/types';
 
-export const validateExpertForm = (form: any): boolean => {
+export const validateExpertForm = (form: Partial<Expert>): boolean => {
   return !!(form.name?.trim() && form.quote?.trim());
 };
 

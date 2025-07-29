@@ -25,7 +25,9 @@ const ExpertList: React.FC<Props> = ({ experts, onRemove }) => {
             <div className="flex-1">
               <div className="font-medium text-white">{expert.name}</div>
               {expert.title && <div className="text-sm text-gray-300">{expert.title}</div>}
-              <div className="text-sm text-gray-200 mt-2 italic">"{expert.quote}"</div>
+              <div className="text-sm text-gray-200 mt-2 italic">
+                &quot;{expert.quote}&quot;
+              </div>
             </div>
             <button onClick={() => onRemove(index)} className="ml-4 text-red-400 hover:text-red-300 text-sm">Remove</button>
           </div>
