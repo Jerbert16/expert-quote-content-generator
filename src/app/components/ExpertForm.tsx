@@ -78,6 +78,12 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
     setExperts((prev) => prev.filter((_, i) => i !== index));
   };
 
+  // NEW: remove all experts
+  const handleRemoveAllExperts = () => {
+    if (experts.length === 0) return;
+    setExperts([]);
+  };
+
   const handleClearBlog = () => {
     setGeneratedContent("");
     setApiError("");
@@ -129,7 +135,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
               </span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-white mb-3 sm:mb-4 leading-tight">
-              Hey Marketing Experts! 👋
+              Hey Subject Matter Experts! 👋
             </h2>
             <p className="text-white/70 text-sm">
               Share your expertise by answering today&apos;s question.
@@ -157,7 +163,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
 
             {/* Question */}
             <div className="bg-white/80 rounded-lg sm:rounded-xl p-3 sm:p-4 border-l-4 sm:border-l-6 border-teal-400 mb-4 sm:mb-6">
-              <p className="text-gray-800 text-sm sm:text-base leading-relaxed italic font-medium">
+              <p className="text-gray-800 text-2xl leading-relaxed italic font-medium p-2">
                 &quot;{questionOfTheDay.question}&quot;
               </p>
             </div>
@@ -248,33 +254,28 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
           {/* Expert Responses */}
           {experts.length > 0 && (
             <div className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6">
-              <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
-                Expert Responses ({experts.length})
-              </h3>
-<div
-  className={`space-y-3 sm:space-y-4 ${experts.length > 3 ? "overflow-y-auto max-h-[50rem] pr-2" : ""}`}
-  style={{
-    scrollbarWidth: "thin",
-    scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
-  }}
->
-  <style jsx>{`
-    div::-webkit-scrollbar {
-      width: 6px;
-    }
-    div::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-    }
-    div::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-    }
-    div::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.5);
-    }
-  `}</style>
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-white font-semibold text-sm sm:text-base">
+                  Expert Responses ({experts.length})
+                </h3>
+                <button
+                  onClick={handleRemoveAllExperts}
+                  disabled={experts.length === 0}
+                  className="text-red-400 hover:text-red-300 text-xs sm:text-sm transition-colors px-3 py-1 rounded-lg hover:bg-red-500/10 disabled:opacity-50"
+                >
+                  Remove All
+                </button>
+              </div>
 
+              <div
+                className={`space-y-3 sm:space-y-4 ${
+                  experts.length > 3 ? "overflow-y-auto max-h-[50rem] pr-2" : ""
+                }`}
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
+                }}
+              >
                 <style jsx>{`
                   div::-webkit-scrollbar {
                     width: 6px;
@@ -291,6 +292,7 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                     background: rgba(255, 255, 255, 0.5);
                   }
                 `}</style>
+
                 {experts.map((expert, index) => (
                   <div
                     key={index}
@@ -298,12 +300,18 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-white text-sm sm:text-base truncate">{expert.name}</div>
+                        <div className="font-medium text-white text-sm sm:text-base truncate">
+                          {expert.name}
+                        </div>
                         {expert.title && (
-                          <div className="text-xs sm:text-sm text-emerald-300 truncate">{expert.title}</div>
+                          <div className="text-xs sm:text-sm text-emerald-300 truncate">
+                            {expert.title}
+                          </div>
                         )}
                         {expert.expertise && (
-                          <div className="text-xs text-blue-300 mt-1 truncate">{expert.expertise}</div>
+                          <div className="text-xs text-blue-300 mt-1 truncate">
+                            {expert.expertise}
+                          </div>
                         )}
                       </div>
                       <button
@@ -316,13 +324,17 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
 
                     <div className="space-y-3">
                       <div className="text-sm text-gray-100 italic leading-relaxed">
-                        <span className="text-white/60 text-xs uppercase tracking-wide block mb-1">Answer:</span>
+                        <span className="text-white/60 text-xs uppercase tracking-wide block mb-1">
+                          Answer:
+                        </span>
                         <div className="break-words">&quot;{expert.quote}&quot;</div>
                       </div>
 
                       {expert.context && expert.context.trim() && (
                         <div className="text-xs sm:text-sm text-gray-200 leading-relaxed bg-white/5 rounded-lg p-3 border-l-2 border-blue-400">
-                          <span className="text-white/60 text-xs uppercase tracking-wide block mb-1">Additional Context:</span>
+                          <span className="text-white/60 text-xs uppercase tracking-wide block mb-1">
+                            Additional Context:
+                          </span>
                           <div className="break-words">{expert.context}</div>
                         </div>
                       )}
@@ -392,7 +404,9 @@ const ExpertForm: React.FC<ExpertFormProps> = ({ onAddExpert }) => {
                 </button>
               </div>
               <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 max-h-80 sm:max-h-96 overflow-y-auto">
-                <pre className="text-gray-200 text-xs sm:text-sm whitespace-pre-wrap break-words">{generatedContent}</pre>
+                <pre className="text-gray-200 text-xs sm:text-sm whitespace-pre-wrap break-words">
+                  {generatedContent}
+                </pre>
               </div>
             </div>
           )}
