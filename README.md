@@ -3,6 +3,8 @@
 Turn expert opinions into well-structured, SEO-ready blog posts—automatically.  
 This app collects short inputs from subject-matter experts, organizes them into an outline, and uses **Google Gemini** to draft a cohesive blog post with headings, metadata, and FAQs.
 
+[Try it out here!](https://expertquotegen.netlify.app/)
+
 ---
 
 ## ✨ Features
@@ -44,6 +46,6 @@ GOOGLE_GEMINI_API_KEY=your_key_here
 # (Optional) Database
 DATABASE_URL="postgresql://user:password@host:5432/dbname?schema=public"
 
----
 
-[Try it out here!](https://expertquotegen.netlify.app/)
+
+
