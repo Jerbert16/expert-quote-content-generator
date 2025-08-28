@@ -43,3 +43,5 @@ GOOGLE_GEMINI_API_KEY=your_key_here
 
 # (Optional) Database
 DATABASE_URL="postgresql://user:password@host:5432/dbname?schema=public"
+
+[Try it out here!](https://expertquotegen.netlify.app/)
